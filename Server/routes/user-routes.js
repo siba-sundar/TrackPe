@@ -2,7 +2,7 @@ import express from "express";
 import {body, validationResult} from "express-validator";
 const router = express.Router();
 import userController from "../controllers/user-controller.js";
-import authUser from "../middlewares/auth-middleware.js";
+import authMiddleware from "../middlewares/auth-middleware.js";
 
 
 router.post("/register", [
@@ -23,9 +23,9 @@ userController.loginUser
 )
 
 
-router.get('/profile' ,authUser, userController.getUserProfile);
+router.get('/profile' ,authMiddleware.authUser, userController.getUserProfile);
 
 
 
-router.get("/logout", authUser, userController.logoutUser);
+router.get("/logout", authMiddleware.authUser, userController.logoutUser);
 export default router;
