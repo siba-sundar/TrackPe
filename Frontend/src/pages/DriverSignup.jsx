@@ -11,7 +11,7 @@ function DriverSignup() {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(firstName, lastName, email, password);
-    setUserData({
+    setDriverData({
       fullName: {
         firstName: firstName,
         lastName: lastName
