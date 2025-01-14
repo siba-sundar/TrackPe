@@ -3,13 +3,13 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const driverSchema = new mongoose.Schema({
-    fullName: {
-        firstName: {
+    fullname: {
+        firstname: {
             type: String,
             required: true,
             minlength: [3, "First name must be at least 3 characters long"],
         },
-        lastName: {
+        lastname: {
             type: String,
             required: true,
         },
@@ -18,7 +18,6 @@ const driverSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        lowercase: true,
         match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Please use a valid email address"],
     },
     password: {
@@ -40,6 +39,8 @@ const driverSchema = new mongoose.Schema({
         plate: {
             type: String,
             required: true,
+            unique: true,
+            sparese: true,
             minlength: [3, "Plate must be at least 3 characters long"],
         },
         capacity: {

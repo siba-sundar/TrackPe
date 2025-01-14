@@ -6,9 +6,9 @@ const createDriver = async ({ firstname, lastname, email, password, color, plate
     }
 
     const driver = await driverModel.create({
-        fullName: {
-            firstName: firstname,
-            lastName: lastname,
+        fullname: {
+            firstname: firstname,
+            lastname: lastname,
         },
         email,
         password,

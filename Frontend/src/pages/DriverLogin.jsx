@@ -1,24 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
+import { DriverDataContext } from '../context/DriverContext'
+import axios from 'axios'
+
 
 function DriverLogin() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [driverData, setDriverData] = useState({})
 
-  const submitHandler = (e) => {
-    e.preventDefault()
-    console.log(email, password)
-    setDriverData({
-      email: email,
-      password: password
-    })
 
-    console.log(driverData)
-    setEmail('')
-    setPassword('')
-  }
+  const { driver, setDriver } = React.useContext(DriverDataContext)
+  const navigate = useNavigate()
+
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    console.log(email, password);
+
+    const Driver = { email, password };
+
+    // Make the API request
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/driver/login`, Driver);
+
+    // Check for success
+    if (response.status === 200) {
+      const { driver, token } = response.data; // Destructure the API response
+      setDriver(token); // Update context with driver data
+      localStorage.setItem('token', token); // Save token to local storage
+      navigate('/driver-home');
+    } else {
+      console.error('Login failed:', response.data.message);
+      alert(response.data.message || 'Login failed. Please try again.'); // Notify user
+    }
+
+
+    // Reset state only on successful login
+    setEmail('');
+    setPassword('');
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 to-gray-600 text-gray-100 p-4">
