@@ -1,30 +1,52 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { UserDataContext } from '../context/UserContext';
+
 
 function UserSignup() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userData, setUserData] = useState({});
 
-  const submitHandler = (e) => {
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserDataContext); // Fixed context deconstruction
+
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(firstName, lastName, email, password);
-    setUserData({
-      fullName:{
-        firstName:firstName,
-        lastName:lastName
+
+    const newUser = {
+      fullname: {
+        firstname: firstName,
+        lastname: lastName,
       },
-      email:email,
-      password:password
-    });
+      email: email,
+      password: password,
+    };
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/user/register`,
+        newUser
+      );
+
+      if (response.status === 201) {
+        const data = response.data;
+        setUser(data.user);
+        localStorage.setItem('token', data.token);
+        navigate('/home');
+      } else {
+        console.error('Registration failed:', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error during registration:', error.message);
+    }
+
     setFirstName('');
     setLastName('');
     setEmail('');
     setPassword('');
-
-    console.log(userData);
   };
 
   return (
