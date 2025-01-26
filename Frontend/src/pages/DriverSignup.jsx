@@ -141,7 +141,7 @@ function DriverSignup() {
               <option value="">Select Vehicle Type</option>
               <option value="car">Car</option>
               <option value="auto">Auto</option>
-              <option value="motorcycle">Motorcycle</option>
+              <option value="moto">Motorcycle</option>
             </select>
           </div>
           {error && (

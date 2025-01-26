@@ -6,6 +6,7 @@ import connectToDb from './db/db.js';
 import userRouter from './routes/user-routes.js';
 import driverRouter from './routes/driver-route.js';
 import cookieParser from 'cookie-parser';
+import mapsRoutes from "./routes/maps-route.js"
 
 connectToDb();
 
@@ -25,5 +26,5 @@ app.get("/" ,(req,res) =>{
 
 app.use('/user', userRouter);
 app.use('/driver', driverRouter);
-
+app.use('/maps', mapsRoutes)
 export default app;

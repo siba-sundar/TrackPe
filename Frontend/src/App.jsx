@@ -13,6 +13,8 @@ import UserProtectedWrapper from './pages/UserProtectedWrapper'
 import DriverProtectedWrapper from './pages/DriverProtectWrapper'
 import UserLogout from './pages/UserLogout'
 import DriverHome from './pages/DriverHome'
+import Riding from './pages/Riding'
+import DriverRiding from './pages/DriverRiding'
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route  path='/'  element={<Start/>}/>
         <Route  path='/user-signup'  element={<UserSignup/>}/>
         <Route  path='/user-login'  element={<UserLogin/>}/>
+        <Route path='/riding' element={<Riding />} />
+        <Route path='/driver-riding' element={<DriverRiding />} />
         <Route  path='/driver-login'  element={<DriverLogin/>}/>
         <Route  path='/driver-signup'  element={<DriverSignup/>}/>
         <Route path='/home' element={
