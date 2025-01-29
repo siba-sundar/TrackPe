@@ -7,7 +7,7 @@ import gsap from 'gsap'
 import ConfirmRidePopUp from '../components/ConfirmRidePopUp'
 import { useEffect, useContext } from 'react'
 import { SocketContext } from '../context/SocketContext'
-import { DriverDataContext } from '../context/CapatainContext'
+import { DriverDataContext } from '../context/DriverContext.jsx'
 import axios from 'axios'
 
 const DriverHome = () => {
