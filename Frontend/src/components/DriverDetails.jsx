@@ -1,6 +1,6 @@
 
 import React, { useContext } from 'react'
-import { DriverDataContext } from '../context/CapatainContext'
+import { DriverDataContext } from '../context/DriverContext.jsx'
 
 const DriverDetails = () => {
 
